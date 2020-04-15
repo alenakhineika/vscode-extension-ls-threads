@@ -1,7 +1,7 @@
 {
 	"name": "vscode-extension-ls-threads",
 	"displayName": "VSCodeExtensionLSThreads",
-	"description": "Example of VSCode extension with LS an child threads",
+	"description": "Example of VSCode extension with LS and child threads",
 	"version": "0.0.1",
 	"engines": {
 		"vscode": "^1.44.0"
