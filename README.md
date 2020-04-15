@@ -1,6 +1,6 @@
-# A VSCode extension with the language server and child threads
+# A VSCode extension with LS and child threads
 
-This project is an example of usage the VSCode Language Server and Node Worker Threads that configured together allow managing long-running operations with a possibility to cancel them.
+This project is an example of how to launch a simple VSCode extension with the language server support and usage of Node worker threads. This set up improves the performance and stability of the extension by delegating long-running operations parallel processes with a possibility to terminate them.
 
 ## Usage
 
