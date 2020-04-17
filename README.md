@@ -23,13 +23,9 @@ The VSCode language server follows the [Microsoft LSP specification](https://mic
 
 The language client runs next to UI code and uses [vscode-languageclient](https://github.com/microsoft/vscode-languageserver-node/tree/master/client) for JSON RPC over IPC.
 
-Use `console.log()` for printing debug information in the Debug Console of the extension.
-
 ### Server
 
-The language server runs as a separate Node process using [vscode-languageserver](https://github.com/microsoft/vscode-languageserver-node/tree/master/server)
-
-Use `connection.console.log()` for printing debug information in the `Language Server Example` Output Channel of the server.
+The language server runs as a separate Node process using [vscode-languageserver](https://github.com/microsoft/vscode-languageserver-node/tree/master/server).
 
 ## Worker threads
 

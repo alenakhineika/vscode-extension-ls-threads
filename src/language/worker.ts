@@ -1,11 +1,15 @@
 import { parentPort, workerData } from 'worker_threads';
 
+type WorkerResult = any;
+type WorkerError = string | null;
+
 async function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-const executeSleep = async (test: any) => {
-  console.log('Test value:', test);
+// The long-running operation
+const executeSleep = async (test: any): Promise<[WorkerError, WorkerResult?]> => {
+  // The `test` variable from the main thread is accessible here
 
   try {
     return [null, await sleep(10000)];

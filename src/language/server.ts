@@ -1,7 +1,6 @@
 import {
 	createConnection,
 	TextDocuments,
-	TextDocument,
 	Diagnostic,
 	DiagnosticSeverity,
 	ProposedFeatures,
@@ -10,8 +9,9 @@ import {
 	CompletionItem,
 	CompletionItemKind,
 	TextDocumentPositionParams,
-	TextDocumentsConfiguration
+	TextDocumentSyncKind
 } from 'vscode-languageserver';
+import { TextDocument } from 'vscode-languageserver-textdocument';
 import { Worker as WorkerThreads } from 'worker_threads';
 
 const path = require('path');
@@ -22,12 +22,7 @@ let connection = createConnection(ProposedFeatures.all);
 
 // Create a simple text document manager. The text document manager
 // supports full document sync only
-const documentsConfig = {
-	create: () => { },
-	update: () => { }
-} as TextDocumentsConfiguration<any>;
-
-let documents: TextDocuments<any> = new TextDocuments(documentsConfig);
+const documents: TextDocuments<TextDocument> = new TextDocuments(TextDocument);
 
 let hasConfigurationCapability: boolean = false;
 let hasWorkspaceFolderCapability: boolean = false;
@@ -52,7 +47,10 @@ connection.onInitialize((params: InitializeParams) => {
 
 	return {
 		capabilities: {
-			textDocumentSync: (documents as any).syncKind,
+			textDocumentSync: {
+				openClose: true,
+				change: TextDocumentSyncKind.Incremental,
+			},
 			// Tell the client that the server supports code completion
 			completionProvider: {
 				resolveProvider: true
