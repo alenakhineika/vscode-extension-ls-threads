@@ -28,8 +28,8 @@ export function activate(context: ExtensionContext) {
     debug: {
       module: serverModule,
       transport: TransportKind.ipc,
-      options: debugOptions,
-    },
+      options: debugOptions
+    }
   };
 
   // Options to control the language client
@@ -37,12 +37,12 @@ export function activate(context: ExtensionContext) {
     // Register the server for plain text documents
     documentSelector: [
       { scheme: 'untitled', language: 'plaintext' },
-      { scheme: 'file', language: 'plaintext' },
+      { scheme: 'file', language: 'plaintext' }
     ],
     synchronize: {
       // Notify the server about file changes to '.clientrc files contained in the workspace
-      fileEvents: workspace.createFileSystemWatcher('**/.clientrc'),
-    },
+      fileEvents: workspace.createFileSystemWatcher('**/.clientrc')
+    }
   };
 
   // Create the language client and start the client.
@@ -61,23 +61,21 @@ export function deactivate(): Thenable<void> | undefined {
   if (!client) {
     return undefined;
   }
+
   return client.stop();
 }
 
 let source: CancellationTokenSource;
 
 export function executeSleep(): Promise<any> {
-  return client.onReady().then(async () => {
+  return client.onReady().then(() => {
     // Instantiate a new CancellationTokenSource object
     // that generates a cancellation token for each run of a playground
     source = new CancellationTokenSource();
 
     // Send a request with a cancellation token
     // to the language server server to execute a long-running operation
-    return client.sendRequest(
-      'executeSleep',
-      source.token
-    );
+    return client.sendRequest('executeSleep', source.token);
   });
 }
 
@@ -92,5 +90,3 @@ export function cancelSleep(): Promise<any> {
     return resolve(true);
   });
 }
-
-
